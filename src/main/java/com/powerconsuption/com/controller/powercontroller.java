@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hyperic.sigar.SigarException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.powerconsuption.com.service.Powerconsuptionservice;
+
+
+
+
 
 
 
@@ -63,10 +68,9 @@ public class powercontroller {
 
 	
 	@GetMapping("/power-consumption/{pid}")
-	public double getPowerConsumption(@PathVariable("pid") int pid) throws IOException {
+	public double getPowerConsumption(@PathVariable("pid") int pid) throws Exception {
 	    return powerConsumptionService.getPowerConsumption(pid);
 	}
 
-	
 	
 }

@@ -1,0 +1,9 @@
+spring:
+  jmx:
+    enabled: true
+    default-domain: PowerConsumption
+    server:
+      rmi:
+        registry-host: localhost
+        registry-port: 1099
+        service-port: 1098

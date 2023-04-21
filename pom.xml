@@ -33,11 +33,17 @@
     <artifactId>jna</artifactId>
     <version>5.6.0</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.fusesource/sigar -->
 <dependency>
     <groupId>org.fusesource</groupId>
     <artifactId>sigar</artifactId>
     <version>1.6.4</version>
 </dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,11 +61,8 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-    <groupId>com.intel.powergadget</groupId>
-    <artifactId>powergadgetlibjava</artifactId>
-    <version>3.5.2</version>
-</dependency>
+		
+	
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
