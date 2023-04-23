@@ -10,7 +10,4 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ApplicationPowerConsumptionDto {
     private String appName;
-    private long pid;
-    private double powerConsumptionRate;
-    
 }

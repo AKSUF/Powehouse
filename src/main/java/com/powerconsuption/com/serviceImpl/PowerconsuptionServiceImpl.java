@@ -20,11 +20,14 @@ import javax.management.openmbean.CompositeData;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
+import javax.validation.Valid;
 
 import org.hyperic.sigar.*;
 
 import org.springframework.stereotype.Service;
 
+import com.powerconsuption.com.dto.ApplicationPowerConsumptionDto;
+import com.powerconsuption.com.entity.ApplicationPowerConsumption;
 import com.powerconsuption.com.service.Powerconsuptionservice;
 @Service
 public class PowerconsuptionServiceImpl implements Powerconsuptionservice {
@@ -75,6 +78,13 @@ public class PowerconsuptionServiceImpl implements Powerconsuptionservice {
 	    double watts = rss / 1048576.0 * 0.003;
 	 
 	    return watts;
+	}
+
+
+	@Override
+	public ApplicationPowerConsumption addName(@Valid ApplicationPowerConsumptionDto applicationPowerConsumptionDto) {
+		
+		return null;
 	}
 	
 }

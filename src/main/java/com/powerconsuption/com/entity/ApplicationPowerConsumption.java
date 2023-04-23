@@ -22,13 +22,6 @@ public class ApplicationPowerConsumption {
 	    private Long id;
 
 	    @Column(name = "application_name")
-	    private String applicationName;
-
-	    @Column(name = "pid")
-	    private Integer pid;
-
-	    @Column(name = "power_consumption_rate")
-	    private Double powerConsumptionRate;
-	    
+	    private String applicationName;	    
 	    
 }

@@ -8,28 +8,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.hyperic.sigar.SigarException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.powerconsuption.com.dto.ApplicationPowerConsumptionDto;
+import com.powerconsuption.com.entity.ApplicationPowerConsumption;
 import com.powerconsuption.com.service.Powerconsuptionservice;
-
-
-
-
-
-
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/powerconsumption")
 public class powercontroller {
 	@Autowired
 	private Powerconsuptionservice powerConsumptionService;
-	
+	@Autowired
+	private ModelMapper modelMapper;
 	@GetMapping("/pid")
 	public int getPid(@RequestParam("appName") String appName) throws IOException {
 	    String processName = appName;
@@ -71,6 +73,14 @@ public class powercontroller {
 	public double getPowerConsumption(@PathVariable("pid") int pid) throws Exception {
 	    return powerConsumptionService.getPowerConsumption(pid);
 	}
-
+@PostMapping("/applicationname")
+	public ResponseEntity<ApplicationPowerConsumptionDto>addapplication(@Valid @RequestBody ApplicationPowerConsumptionDto applicationPowerConsumptionDto){
+	ApplicationPowerConsumption applicationPowerConsumption=this.powerConsumptionService.addName(applicationPowerConsumptionDto);
+	ApplicationPowerConsumptionDto newConsumptionDto=this.modelMapper.map(applicationPowerConsumption,ApplicationPowerConsumptionDto.class);
+	
+		return new ResponseEntity<ApplicationPowerConsumptionDto>(newConsumptionDto,HttpStatus.CREATED);
+		
+	}
+	
 	
 }
