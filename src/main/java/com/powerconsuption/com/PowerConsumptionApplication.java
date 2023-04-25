@@ -14,6 +14,8 @@ public class PowerConsumptionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PowerConsumptionApplication.class, args);
 	}
+	
+//	The code defines a Spring bean for creating a new instance of ModelMapper, a Java library for mapping between objects.
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();

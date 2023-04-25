@@ -32,11 +32,18 @@ public class powercontroller {
 	private Powerconsuptionservice powerConsumptionService;
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	// This controller and include method takes the name of an application and returns the PID (Process ID) of that application
 	@GetMapping("/pid")
 	public int getPid(@RequestParam("appName") String appName) throws IOException {
+		// Get the process name from the application name parameter.
 	    String processName = appName;
+	 // Get the current OS name.
 	    String os = System.getProperty("os.name").toLowerCase();
+	 // Initialize the command string.
 	    String cmd = null;
+	    
+	    // Check the OS name and set the appropriate command.
 	    if (os.contains("win")) {
 	        cmd = "tasklist /fo csv /nh /fi \"imagename eq " + processName + ".exe\"";
 	    } else if (os.contains("mac")) {
@@ -46,7 +53,7 @@ public class powercontroller {
 	    } else {
 	        throw new UnsupportedOperationException("Unsupported operating system: " + os);
 	    }
-
+	    // Execute the command and read the output.
 	    Process process = Runtime.getRuntime().exec(cmd);
 	    try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 	        String line = reader.readLine();
@@ -65,14 +72,18 @@ public class powercontroller {
 	            }
 	        }
 	    }
+	 // Return -1 if the PID cannot be found.
 	    return -1;
 	}
 
-	
+	 //GET endpoint with a path variable 'pid'
 	@GetMapping("/power-consumption/{pid}")
 	public double getPowerConsumption(@PathVariable("pid") int pid) throws Exception {
 	    return powerConsumptionService.getPowerConsumption(pid);
 	}
+	
+	
+	 //POST  endpoint to store app name in database
 @PostMapping("/applicationname")
 	public ResponseEntity<ApplicationPowerConsumptionDto>addapplication(@Valid @RequestBody ApplicationPowerConsumptionDto applicationPowerConsumptionDto){
 	ApplicationPowerConsumption applicationPowerConsumption=this.powerConsumptionService.addName(applicationPowerConsumptionDto);
